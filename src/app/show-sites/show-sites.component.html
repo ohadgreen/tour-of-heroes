@@ -1,0 +1,14 @@
+<h2>Sites List</h2>
+<div>
+<ul class="sites">
+  <li *ngFor="let site of sites">
+     {{site}}
+  </li>
+</ul>
+</div>
+<div>
+  <input (input)="newSite=$event.target.value" type="text">
+  <p>{{newSite}}</p>
+  <button (click)="addSite()">add site</button>
+</div>
+
