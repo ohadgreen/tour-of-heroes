@@ -9,8 +9,8 @@ import {tap} from 'rxjs/operators';
 export class SitesService {
 
   private sitesUrl = 'https://20f91516-ec4e-49f4-8bd8-5b338454381b.mock.pstmn.io/siteslist';
-  private sitesList: string[] = [];
-  sitesListBs: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  private sitesList: number[] = [];
+  sitesListBs: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,18 +21,18 @@ export class SitesService {
   }
 
   getSitesFromApi(): void {
-    this.httpClient.get<string[]>(this.sitesUrl).subscribe(response => {
+    this.httpClient.get<number[]>(this.sitesUrl).subscribe(response => {
       this.sitesListBs.next(response);
     });
   }
 
-  addSiteToList(site: string) {
+  addSiteToList(site: number) {
     const tempSites = this.sitesList;
     tempSites.push(site);
     this.sitesList = tempSites;
   }
 
-  addSiteToListBs(site: string) {
+  addSiteToListBs(site: number) {
     const tempSites = this.sitesListBs.value;
     const updatedSitesList = [...tempSites, site];
     this.sitesListBs.next(updatedSitesList);

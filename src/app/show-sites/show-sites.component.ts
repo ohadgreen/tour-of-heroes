@@ -9,15 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class ShowSitesComponent implements OnInit {
   subscription: Subscription;
-  sites: string[];
-  sitesBs: string[];
-  newSite: string;
+  sites: number[];
+  sitesBs: number[];
+  newSite: number;
   constructor(private sitesService: SitesService) { }
-
-  getSites(): void {
-    this.sitesService.getSiteListFromServer()
-      .subscribe(sites => this.sites = sites);
-  }
 
   getSitesBs(): void {
     this.subscription = this.sitesService.sitesListBs.subscribe(
@@ -29,15 +24,13 @@ export class ShowSitesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getSites();
     this.sitesService.getSitesFromApi();
     this.getSitesBs();
   }
 
   addSite() {
-    this.sitesService.addSiteToList(this.newSite);
-    this.sitesService.addSiteToListBs(this.newSite);
-    this.newSite = '';
+    this.sitesService.addSiteToListBs(+this.newSite);
+    this.newSite = null;
   }
 
 }
